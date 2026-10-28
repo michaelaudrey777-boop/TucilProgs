@@ -295,7 +295,7 @@ states/run_right/node = SubResource("AnimationNodeAnimation_nh4ur")
 states/run_right/position = Vector2(322.66666, 139.11111)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_58kc7"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_nh4ur"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_bjvvg"), "idle_right", "run_right", SubResource("AnimationNodeStateMachineTransition_8akj5"), "run_right", "idle_right", SubResource("AnimationNodeStateMachineTransition_bj7e2"), "idle", "idle_right", SubResource("AnimationNodeStateMachineTransition_1murt"), "idle_right", "idle", SubResource("AnimationNodeStateMachineTransition_5sj0x"), "run", "run_right", SubResource("AnimationNodeStateMachineTransition_ovg4i"), "run_right", "run", SubResource("AnimationNodeStateMachineTransition_7wli1"), "idle", "run_right", SubResource("AnimationNodeStateMachineTransition_j0oqr"), "idle_right", "run", SubResource("AnimationNodeStateMachineTransition_xy2vv"), "idle", "idle_back", SubResource("AnimationNodeStateMachineTransition_r4dfn"), "idle_back", "idle", SubResource("AnimationNodeStateMachineTransition_70kwc"), "idle_back", "run_back", SubResource("AnimationNodeStateMachineTransition_yywfu"), "run_back", "idle_back", SubResource("AnimationNodeStateMachineTransition_pcd0u"), "run_back", "run_left", SubResource("AnimationNodeStateMachineTransition_w3p2j"), "run_left", "run_back", SubResource("AnimationNodeStateMachineTransition_knby6"), "idle_left", "idle", SubResource("AnimationNodeStateMachineTransition_18p7g"), "idle", "idle_left", SubResource("AnimationNodeStateMachineTransition_fg2wu"), "idle_left", "run_back", SubResource("AnimationNodeStateMachineTransition_7dqom"), "idle_back", "run_left", SubResource("AnimationNodeStateMachineTransition_go8vc"), "idle_left", "idle_back", SubResource("AnimationNodeStateMachineTransition_wghkl"), "idle_back", "idle_left", SubResource("AnimationNodeStateMachineTransition_yk2xr"), "run_right", "run_back", SubResource("AnimationNodeStateMachineTransition_vs62q"), "run_back", "run_right", SubResource("AnimationNodeStateMachineTransition_qko2e"), "run_left", "idle_left", SubResource("AnimationNodeStateMachineTransition_6u2ft"), "idle_left", "run_left", SubResource("AnimationNodeStateMachineTransition_7nfft"), "idle", "run_back", SubResource("AnimationNodeStateMachineTransition_brjyi"), "idle", "run_left", SubResource("AnimationNodeStateMachineTransition_bnv2y"), "idle_left", "run_right", SubResource("AnimationNodeStateMachineTransition_0xxfp"), "idle_left", "run", SubResource("AnimationNodeStateMachineTransition_l2s38"), "idle_right", "run_back", SubResource("AnimationNodeStateMachineTransition_11qh6"), "idle_right", "run_left", SubResource("AnimationNodeStateMachineTransition_1lgw8"), "idle_back", "run_right", SubResource("AnimationNodeStateMachineTransition_wg44p"), "idle_back", "run", SubResource("AnimationNodeStateMachineTransition_2frc1")]
 
-[node name="Player" type="CharacterBody2D" unique_id=1418533703]
+[node name="Player" type="CharacterBody2D" unique_id=1418533703 groups=["player"]]
 y_sort_enabled = true
 script = ExtResource("1_635qg")
 
@@ -309,8 +309,6 @@ vframes = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=852760330]
 shape = SubResource("CircleShape2D_68yga")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1812154511]
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=828209963]
 libraries/ = SubResource("AnimationLibrary_8akj5")
 
@@ -319,3 +317,5 @@ tree_root = SubResource("AnimationNodeStateMachine_xy2vv")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/is_idle = false
 parameters/conditions/is_running = false
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1812154511]
