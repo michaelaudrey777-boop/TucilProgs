@@ -21,11 +21,11 @@ position = Vector2(-35, 117)
 position = Vector2(815, 719)
 scale = Vector2(0.3, 0.3)
 
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=381791898]
+position = Vector2(-2, -13)
+navigation_polygon = SubResource("NavigationPolygon_68yga")
+
 [node name="NPC" parent="." unique_id=2005168543 node_paths=PackedStringArray("player") instance=ExtResource("3_o5t4i")]
 position = Vector2(768, 749)
 scale = Vector2(0.3, 0.3)
 player = NodePath("../Player")
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=381791898]
-position = Vector2(-2, -13)
-navigation_polygon = SubResource("NavigationPolygon_68yga")
