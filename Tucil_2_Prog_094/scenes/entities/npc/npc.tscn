@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://3u3pl5c3kc4p" path="res://scripts/npc/npc.gd" id="1_p5uw1"]
 [ext_resource type="Texture2D" uid="uid://d3ivfk1o01fa5" path="res://assets/sprites/Blue Haired Woman/blue_haired_woman_shadow.png" id="2_xjnpb"]
+[ext_resource type="AudioStream" uid="uid://djb6cu0yqpbsk" path="res://assets/audio/sfx/footsteps.mp3" id="3_67e1k"]
+[ext_resource type="AudioStream" uid="uid://bee1wo8rm4go0" path="res://assets/audio/sfx/step-on-a-rock.mp3" id="4_hg1eu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8773x"]
 radius = 36.013885
@@ -316,3 +318,11 @@ libraries/ = SubResource("AnimationLibrary_wj0va")
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1875164283]
 tree_root = SubResource("AnimationNodeStateMachine_68yga")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="Footsteps" type="AudioStreamPlayer2D" parent="." unique_id=1135290174]
+stream = ExtResource("3_67e1k")
+volume_db = -8.0
+
+[node name="RockStep" type="AudioStreamPlayer2D" parent="." unique_id=1297507498]
+stream = ExtResource("4_hg1eu")
+volume_db = -20.0

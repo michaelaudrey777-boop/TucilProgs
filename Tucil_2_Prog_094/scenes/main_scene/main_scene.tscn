@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://g02lvykcyn51" path="res://scenes/maps/map.tscn" id="1_symxd"]
 [ext_resource type="PackedScene" uid="uid://bwnvlwvqd3voc" path="res://scenes/entities/player/player.tscn" id="2_o5t4i"]
 [ext_resource type="PackedScene" uid="uid://cwbj6pbj6n12j" path="res://scenes/entities/npc/npc.tscn" id="3_o5t4i"]
+[ext_resource type="PackedScene" uid="uid://drnasaftrnwxo" path="res://scenes/audio/audio_manager.tscn" id="4_34m6u"]
+[ext_resource type="Script" uid="uid://lhrp4m7gartk" path="res://scenes/audio/audio_manager.gd" id="5_2cqfw"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_68yga"]
 vertices = PackedVector2Array(1650.4766, 907.8125, 316.2422, 892.1719, 286.78906, 291.82813, 1669.5, 278.15625)
@@ -29,3 +31,6 @@ player = NodePath("../Player")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=381791898]
 position = Vector2(-2, -13)
 navigation_polygon = SubResource("NavigationPolygon_68yga")
+
+[node name="AudioManager" parent="." unique_id=232559139 instance=ExtResource("4_34m6u")]
+script = ExtResource("5_2cqfw")
