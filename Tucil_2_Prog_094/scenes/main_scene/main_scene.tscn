@@ -5,11 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://cwbj6pbj6n12j" path="res://scenes/entities/npc/npc.tscn" id="3_o5t4i"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_68yga"]
-vertices = PackedVector2Array(1650.4766, 907.8125, 316.2422, 892.1719, 286.78906, 291.82813, 1669.5, 278.15625)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(270, 276, 301, 908, 1666, 924, 1686, 262)])
+vertices = PackedVector2Array(730, 767, 907, 763, 944, 763, 691, 796, 1233, 395, 1526, 386, 1568, 388, 1666, 924, 1505, 820, 1478, 800, 1281, 596, 1269, 581, 1215, 427, 1239, 580, 921, 442, 1176, 419, 1223, 601, 1261, 622, 1442, 817, 1087, 813, 1052, 803, 958, 732, 905, 467, 1686, 262, 1564, 364, 661, 689, 866, 475, 925, 713, 899, 735, 699, 739, 1512, 367, 1195, 378, 1022, 816, 505, 494, 850, 447, 626, 664, 473, 521, 1170, 400, 880, 418, 635, 719, 662, 763, 1498, 836, 301, 908, 1464, 836, 1070, 837, 587, 691, 435, 492, 1538, 354, 270, 276, 1032, 836, 465, 470, 661, 784)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8, 9, 10, 11, 12), PackedInt32Array(13, 14, 15, 12, 11), PackedInt32Array(14, 16, 17, 9, 18, 19, 20, 21, 22), PackedInt32Array(23, 7, 6, 24), PackedInt32Array(25, 26, 22, 27, 28, 0, 29), PackedInt32Array(30, 5, 4, 31), PackedInt32Array(21, 20, 32, 2), PackedInt32Array(33, 34, 26, 25, 35, 36), PackedInt32Array(28, 1, 0), PackedInt32Array(37, 15, 14, 38), PackedInt32Array(39, 25, 29, 40), PackedInt32Array(41, 8, 7), PackedInt32Array(41, 7, 42, 43), PackedInt32Array(18, 43, 42, 44), PackedInt32Array(17, 10, 9), PackedInt32Array(14, 13, 16), PackedInt32Array(22, 21, 27), PackedInt32Array(36, 35, 45, 46), PackedInt32Array(23, 24, 47), PackedInt32Array(48, 23, 47, 30, 31), PackedInt32Array(44, 19, 18), PackedInt32Array(49, 44, 42), PackedInt32Array(2, 32, 49, 42, 3), PackedInt32Array(38, 34, 33, 50, 48), PackedInt32Array(31, 37, 38, 48), PackedInt32Array(51, 3, 42), PackedInt32Array(39, 40, 51, 42, 45), PackedInt32Array(45, 42, 48, 46), PackedInt32Array(48, 50, 46)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(270, 276, 301, 908, 1666, 924, 1686, 262), PackedVector2Array(662, 763, 699, 739, 730, 767, 691, 796, 661, 784), PackedVector2Array(587, 691, 626, 664, 661, 689, 635, 719), PackedVector2Array(435, 492, 465, 470, 505, 494, 473, 521), PackedVector2Array(850, 447, 880, 418, 921, 442, 905, 467, 866, 475), PackedVector2Array(899, 735, 925, 713, 958, 732, 944, 763, 907, 763), PackedVector2Array(1223, 601, 1239, 580, 1269, 581, 1281, 596, 1261, 622), PackedVector2Array(1022, 816, 1052, 803, 1087, 813, 1070, 837, 1032, 836), PackedVector2Array(1442, 817, 1478, 800, 1505, 820, 1498, 836, 1464, 836), PackedVector2Array(1170, 400, 1195, 378, 1233, 395, 1215, 427, 1176, 419), PackedVector2Array(1512, 367, 1538, 354, 1564, 364, 1568, 388, 1526, 386)])
 cell_size = 8.0
-agent_radius = 16.0
+agent_radius = 0.0
 
 [node name="MainScene" type="Node2D" unique_id=1724817723]
 y_sort_enabled = true
@@ -17,11 +17,17 @@ y_sort_enabled = true
 [node name="Map" parent="." unique_id=121757552 instance=ExtResource("1_symxd")]
 position = Vector2(-35, 117)
 
-[node name="Player" parent="." unique_id=1418533703 instance=ExtResource("2_o5t4i")]
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="Map" unique_id=1137709521]
+radius = 12.0
+
+[node name="WorldEntities" type="Node2D" parent="." unique_id=1763104434]
+y_sort_enabled = true
+
+[node name="Player" parent="WorldEntities" unique_id=1418533703 instance=ExtResource("2_o5t4i")]
 position = Vector2(815, 719)
 scale = Vector2(0.3, 0.3)
 
-[node name="NPC" parent="." unique_id=2005168543 node_paths=PackedStringArray("player") instance=ExtResource("3_o5t4i")]
+[node name="NPC" parent="WorldEntities" unique_id=2005168543 node_paths=PackedStringArray("player") instance=ExtResource("3_o5t4i")]
 position = Vector2(768, 749)
 scale = Vector2(0.3, 0.3)
 player = NodePath("../Player")

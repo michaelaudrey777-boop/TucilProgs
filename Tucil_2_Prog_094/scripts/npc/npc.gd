@@ -18,7 +18,9 @@ var state: State = State.IDLE_BACK
 var last_direction: Vector2 = Vector2.DOWN
 var delay_timer: float = 0.0
 
+@onready var line_2d: Line2D = $Line2D
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var ray_cast: RayCast2D = $RayCast2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_playback: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"]
 
@@ -26,6 +28,9 @@ func _ready() -> void:
 	animation_tree.active = true
 	nav_agent.path_desired_distance = 10.0
 	nav_agent.target_desired_distance = stop_distance
+	
+	nav_agent.velocity_computed.connect(_on_velocity_computed)
+	
 	call_deferred("actor_setup")
 
 func actor_setup() -> void:
@@ -41,36 +46,48 @@ func _physics_process(delta: float) -> void:
 	var move_direction: Vector2 = Vector2.ZERO
 
 	if distance_to_player < flee_distance:
+		line_2d.clear_points()
 		move_direction = (global_position - player.global_position).normalized()
-		velocity = move_direction * speed
+		nav_agent.set_velocity(move_direction * speed)
 		delay_timer = 0.0
-		move_and_slide()
-		update_state_and_animation(move_direction)
 		return
 
 	if distance_to_player <= stop_distance:
-		velocity = Vector2.ZERO
+		line_2d.clear_points()
+		nav_agent.set_velocity(Vector2.ZERO)
 		delay_timer = 0.0
-		move_and_slide()
-		update_state_and_animation(Vector2.ZERO)
 		return
 
 	if delay_timer < follow_delay:
 		delay_timer += delta
-		velocity = Vector2.ZERO
-		move_and_slide()
-		update_state_and_animation(Vector2.ZERO)
+		nav_agent.set_velocity(Vector2.ZERO)
 		return
 
-	nav_agent.target_position = player.global_position
+	ray_cast.target_position = ray_cast.to_local(player.global_position)
+	ray_cast.force_raycast_update()
 
-	if not nav_agent.is_navigation_finished():
-		var next_path_position: Vector2 = nav_agent.get_next_path_position()
-		move_direction = (next_path_position - global_position).normalized()
+	if ray_cast.is_colliding():
+		nav_agent.target_position = player.global_position
+		
+		line_2d.clear_points()
+		for point in nav_agent.get_current_navigation_path():
+			line_2d.add_point(to_local(point))
 
-	velocity = move_direction * speed
+		if not nav_agent.is_navigation_finished():
+			var next_path_position: Vector2 = nav_agent.get_next_path_position()
+			move_direction = (next_path_position - global_position).normalized()
+		else:
+			move_direction = (player.global_position - global_position).normalized()
+	else:
+		line_2d.clear_points()
+		move_direction = (player.global_position - global_position).normalized()
+
+	nav_agent.set_velocity(move_direction * speed)
+
+func _on_velocity_computed(safe_velocity: Vector2) -> void:
+	velocity = safe_velocity
 	move_and_slide()
-	update_state_and_animation(move_direction)
+	update_state_and_animation(safe_velocity.normalized())
 
 func update_state_and_animation(move_direction: Vector2) -> void:
 	if move_direction != Vector2.ZERO:

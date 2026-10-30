@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d3ivfk1o01fa5" path="res://assets/sprites/Blue Haired Woman/blue_haired_woman_shadow.png" id="2_xjnpb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8773x"]
-radius = 36.013885
+radius = 23.021729
 
 [sub_resource type="Animation" id="Animation_67e1k"]
 length = 0.001
@@ -300,6 +300,10 @@ frame = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1026351306]
 shape = SubResource("CircleShape2D_8773x")
 
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=611401371]
+target_position = Vector2(0, 0)
+collide_with_areas = true
+
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1586538802]
 path_desired_distance = 16.0
 target_desired_distance = 32.0
@@ -307,8 +311,9 @@ avoidance_enabled = true
 radius = 16.0
 max_speed = 150.0
 
-[node name="RayCast2D" type="RayCast2D" parent="." unique_id=611401371]
-target_position = Vector2(0, 0)
+[node name="Line2D" type="Line2D" parent="." unique_id=883730506]
+width = 2.0
+default_color = Color(1, 0, 1, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1241915572]
 libraries/ = SubResource("AnimationLibrary_wj0va")
@@ -316,3 +321,5 @@ libraries/ = SubResource("AnimationLibrary_wj0va")
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1875164283]
 tree_root = SubResource("AnimationNodeStateMachine_68yga")
 anim_player = NodePath("../AnimationPlayer")
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
