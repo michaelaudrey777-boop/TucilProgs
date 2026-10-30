@@ -301,7 +301,6 @@ frame = 4
 shape = SubResource("CircleShape2D_8773x")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=611401371]
-enabled = false
 target_position = Vector2(0, 0)
 collide_with_areas = true
 
