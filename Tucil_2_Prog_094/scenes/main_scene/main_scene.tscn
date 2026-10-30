@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://g02lvykcyn51" path="res://scenes/maps/map.tscn" id="1_symxd"]
 [ext_resource type="PackedScene" uid="uid://bwnvlwvqd3voc" path="res://scenes/entities/player/player.tscn" id="2_o5t4i"]
 [ext_resource type="PackedScene" uid="uid://cwbj6pbj6n12j" path="res://scenes/entities/npc/npc.tscn" id="3_o5t4i"]
+[ext_resource type="PackedScene" uid="uid://drnasaftrnwxo" path="res://scenes/audio/audio_manager.tscn" id="4_34m6u"]
+[ext_resource type="Script" uid="uid://lhrp4m7gartk" path="res://scenes/audio/audio_manager.gd" id="5_2cqfw"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_68yga"]
 vertices = PackedVector2Array(730, 767, 907, 763, 944, 763, 691, 796, 1233, 395, 1526, 386, 1568, 388, 1666, 924, 1505, 820, 1478, 800, 1281, 596, 1269, 581, 1215, 427, 1239, 580, 921, 442, 1176, 419, 1223, 601, 1261, 622, 1442, 817, 1087, 813, 1052, 803, 958, 732, 905, 467, 1686, 262, 1564, 364, 661, 689, 866, 475, 925, 713, 899, 735, 699, 739, 1512, 367, 1195, 378, 1022, 816, 505, 494, 850, 447, 626, 664, 473, 521, 1170, 400, 880, 418, 635, 719, 662, 763, 1498, 836, 301, 908, 1464, 836, 1070, 837, 587, 691, 435, 492, 1538, 354, 270, 276, 1032, 836, 465, 470, 661, 784)
@@ -35,3 +37,6 @@ player = NodePath("../Player")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=381791898]
 position = Vector2(-2, -13)
 navigation_polygon = SubResource("NavigationPolygon_68yga")
+
+[node name="AudioManager" parent="." unique_id=232559139 instance=ExtResource("4_34m6u")]
+script = ExtResource("5_2cqfw")

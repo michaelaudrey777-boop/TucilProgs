@@ -28,6 +28,12 @@ var last_direction: Vector2 = Vector2.DOWN
 @onready var animation_playback: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"]
 @onready var camera: Camera2D = $Camera2D
 
+# AUDIO
+@onready var audio_manager = get_node_or_null("../AudioManager")
+
+var footstep_timer: float = 0.0
+@export var footstep_interval: float = 0.4
+
 func _ready() -> void:
 	animation_tree.active = true
 	if camera:
@@ -42,8 +48,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			var new_zoom = camera.zoom - Vector2(zoom_speed, zoom_speed)
 			camera.zoom = new_zoom.clamp(Vector2(min_zoom, min_zoom), Vector2(max_zoom, max_zoom))
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	movement_loop()
+	update_footsteps(delta)
 
 func movement_loop() -> void:
 	var move_direction: Vector2 = Input.get_vector("Left", "Right", "Up", "Down")
@@ -88,3 +95,61 @@ func update_animation() -> void:
 		State.RUN_LEFT: animation_playback.travel("run_left")
 		State.RUN_RIGHT: animation_playback.travel("run_right")
 		State.ATTACK: animation_playback.travel("attack")
+
+
+func get_surface_type() -> String:
+	var layer_names = [
+		"misc_ground",
+		"misc_water",
+		"plateau",
+		"water",
+		"ground"
+	]
+
+	for layer_name in layer_names:
+		var tile_layer = get_node_or_null("../Map/" + layer_name) as TileMapLayer
+
+		if tile_layer == null:
+			continue
+
+		var local_position = tile_layer.to_local(global_position)
+
+		var cell_position = tile_layer.local_to_map(local_position)
+
+		var tile_data = tile_layer.get_cell_tile_data(cell_position)
+
+		if tile_data == null:
+			continue
+
+		var surface = str(tile_data.get_custom_data("surface_type"))
+
+		if surface == "rock":
+			return "rock"
+
+	return "ground"
+
+var was_moving: bool = false
+
+func update_footsteps(delta: float) -> void:
+	var is_moving = velocity.length_squared() > 1.0
+
+	if not is_moving:
+		footstep_timer = 0.0
+		was_moving = false
+		return
+
+	if not was_moving:
+		was_moving = true
+		footstep_timer = 0.0
+
+		if audio_manager != null:
+			audio_manager.play_step(get_surface_type())
+		return
+
+	footstep_timer += delta
+
+	if footstep_timer >= footstep_interval:
+		footstep_timer = 0.0
+
+		if audio_manager != null:
+			audio_manager.play_step(get_surface_type())
