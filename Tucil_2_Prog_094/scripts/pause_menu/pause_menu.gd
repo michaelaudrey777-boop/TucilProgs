@@ -1,8 +1,5 @@
 extends Control
 
-var pause_button = preload("res://assets/pause_menu/Pause.png")
-var start_button = preload("res://assets/pause_menu/Start.png")
-
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS  # so it works while the tree is paused
 	visible = false
@@ -18,7 +15,4 @@ func toggle_pause():
 	var paused = not get_tree().paused
 	get_tree().paused = paused
 	visible = paused
-	if paused == false:
-		$"../Button".icon = pause_button
-	else:
-		$"../Button".icon = start_button
+	$"../Button".visible = not paused

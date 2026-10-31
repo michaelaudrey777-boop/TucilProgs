@@ -60,6 +60,19 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_6loks")
 
+[node name="ColorRect" type="ColorRect" parent="PauseMenu/Control" unique_id=803485853]
+self_modulate = Color(0, 0, 0, 0.53333336)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 145.0
+offset_top = -179.0
+offset_right = 145.0
+offset_bottom = -179.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="TextureRect" type="TextureRect" parent="PauseMenu/Control" unique_id=674026408]
 layout_mode = 1
 anchors_preset = 15
@@ -82,6 +95,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/Control/CenterContainer" unique_id=1292398756]
+layout_mode = 2
 
 [node name="Button" type="Button" parent="PauseMenu" unique_id=208595174]
 process_mode = 3
