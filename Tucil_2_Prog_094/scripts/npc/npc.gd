@@ -24,7 +24,6 @@ var delay_timer: float = 0.0
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_playback: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"]
 
-# AUDIO
 @onready var footsteps: AudioStreamPlayer2D = $Footsteps
 @onready var rock_step: AudioStreamPlayer2D = $RockStep
 
@@ -53,7 +52,6 @@ func _physics_process(delta: float) -> void:
 	if not player:
 		return
 	
-	update_npc_movement(delta)
 	update_footsteps(delta)
 
 	var distance_to_player: float = global_position.distance_to(player.global_position)
@@ -140,43 +138,6 @@ func play_animation() -> void:
 		State.RUN_LEFT: animation_playback.travel("run_left")
 		State.RUN_RIGHT: animation_playback.travel("run_right")
 
-
-func update_npc_movement(delta: float) -> void:
-	var distance_to_player: float = global_position.distance_to(player.global_position)
-	var move_direction: Vector2 = Vector2.ZERO
-
-	if distance_to_player < flee_distance:
-		move_direction = (global_position - player.global_position).normalized()
-		velocity = move_direction * speed
-		delay_timer = 0.0
-		move_and_slide()
-		update_state_and_animation(move_direction)
-		return
-
-	if distance_to_player <= stop_distance:
-		velocity = Vector2.ZERO
-		delay_timer = 0.0
-		move_and_slide()
-		update_state_and_animation(Vector2.ZERO)
-		return
-
-	if delay_timer < follow_delay:
-		delay_timer += delta
-		velocity = Vector2.ZERO
-		move_and_slide()
-		update_state_and_animation(Vector2.ZERO)
-		return
-
-	nav_agent.target_position = player.global_position
-
-	if not nav_agent.is_navigation_finished():
-		var next_path_position: Vector2 = nav_agent.get_next_path_position()
-		move_direction = (next_path_position - global_position).normalized()
-
-	velocity = move_direction * speed
-	move_and_slide()
-	update_state_and_animation(move_direction)
-
 func get_surface_type() -> String:
 	var layer_names = [
 		"misc_ground",
@@ -205,7 +166,6 @@ func get_surface_type() -> String:
 
 	return "ground"
 
-
 func update_footsteps(delta: float) -> void:
 	var is_moving = velocity.length_squared() > 1.0
 
@@ -214,20 +174,17 @@ func update_footsteps(delta: float) -> void:
 		was_moving = false
 		return
 
-	# Mainkan langkah pertama secara langsung.
 	if not was_moving:
 		was_moving = true
 		footstep_timer = 0.0
 		play_npc_step()
 		return
 
-	# Mainkan langkah selanjutnya sesuai interval.
 	footstep_timer += delta
 
 	if footstep_timer >= footstep_interval:
 		footstep_timer = 0.0
 		play_npc_step()
-
 
 func play_npc_step() -> void:
 	var surface_type = get_surface_type()
