@@ -85,7 +85,6 @@ func movement_loop() -> void:
 
 func update_animation() -> void:
 	match state:
-		# Swapped up/down animation strings so facing up plays back-facing animations
 		State.IDLE_UP: animation_playback.travel("idle_back")
 		State.IDLE_BACK: animation_playback.travel("idle")
 		State.IDLE_LEFT: animation_playback.travel("idle_left")
