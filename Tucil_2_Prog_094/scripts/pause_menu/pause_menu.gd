@@ -15,4 +15,7 @@ func toggle_pause():
 	var paused = not get_tree().paused
 	get_tree().paused = paused
 	visible = paused
-	$"../Button".visible = not paused
+	$"../pause".visible = not paused
+
+func _on_return_pressed() -> void:
+	toggle_pause()

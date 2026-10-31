@@ -5,10 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cwbj6pbj6n12j" path="res://scenes/entities/npc/npc.tscn" id="3_o5t4i"]
 [ext_resource type="PackedScene" uid="uid://drnasaftrnwxo" path="res://scenes/audio/audio_manager.tscn" id="4_34m6u"]
 [ext_resource type="Script" uid="uid://lhrp4m7gartk" path="res://scenes/audio/audio_manager.gd" id="5_2cqfw"]
-[ext_resource type="Script" uid="uid://by8rm16alv7qj" path="res://scripts/pause_menu/pause_menu.gd" id="6_6loks"]
-[ext_resource type="Texture2D" uid="uid://c0qm1q1j5v5hj" path="res://assets/pause_menu/paused.png" id="6_kbdpr"]
-[ext_resource type="Texture2D" uid="uid://by4xrj6sennya" path="res://assets/pause_menu/Pause.png" id="7_6ycpv"]
-[ext_resource type="Script" uid="uid://nswcp3pf5r8n" path="res://scenes/main_scene/button.gd" id="9_umvci"]
+[ext_resource type="PackedScene" uid="uid://c7ayl2kkf754e" path="res://scenes/main_scene/pause_menu.tscn" id="6_kbdpr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_68yga"]
 vertices = PackedVector2Array(1233, 395, 1526, 386, 1568, 388, 1666, 924, 1505, 820, 1478, 800, 1281, 596, 1269, 581, 1215, 427, 1170, 400, 1084, 450, 1008, 454, 921, 442, 880, 418, 1195, 378, 635, 719, 661, 689, 768, 686, 800, 690, 810, 706, 699, 739, 1239, 580, 1182, 556, 1178, 520, 1176, 419, 1686, 262, 1564, 364, 734, 530, 739, 535, 685, 534, 705, 528, 1442, 817, 1278, 730, 1274, 683, 1261, 622, 1262, 676, 1258, 662, 1512, 367, 1223, 601, 1165, 517, 1163, 502, 1498, 836, 301, 908, 1464, 836, 1070, 837, 1202, 661, 1201, 677, 1196, 676, 1193, 649, 766, 657, 743, 658, 678, 642, 734, 642, 626, 664, 671, 628, 643, 626, 1137, 680, 1054, 625, 1053, 593, 1096, 593, 1155, 650, 1153, 678, 505, 494, 577, 538, 578, 550, 510, 555, 491, 524, 680, 517, 704, 488, 596, 519, 465, 470, 270, 276, 591, 535, 958, 732, 1137, 693, 1147, 693, 1149, 725, 1136, 735, 944, 763, 992, 473, 992, 485, 963, 487, 905, 467, 1007, 472, 958, 500, 914, 502, 866, 475, 1119, 499, 1117, 467, 882, 519, 879, 550, 862, 550, 860, 536, 907, 660, 933, 660, 935, 676, 904, 674, 1004, 635, 1005, 626, 1087, 468, 1116, 576, 1118, 561, 828, 504, 815, 504, 810, 486, 850, 447, 831, 531, 911, 515, 925, 713, 970, 668, 1104, 578, 989, 649, 989, 640, 585, 610, 636, 611, 587, 691, 448, 528, 516, 594, 1538, 354, 1241, 765, 1246, 752, 1257, 750, 1264, 738, 1087, 813, 1154, 769, 1155, 757, 1052, 803, 730, 767, 907, 763, 899, 735, 1032, 836, 1022, 816, 691, 796, 574, 595, 854, 704, 861, 692, 886, 688, 895, 675, 973, 657, 661, 784, 662, 763, 435, 492)
@@ -45,78 +42,4 @@ navigation_polygon = SubResource("NavigationPolygon_68yga")
 [node name="AudioManager" parent="." unique_id=232559139 instance=ExtResource("4_34m6u")]
 script = ExtResource("5_2cqfw")
 
-[node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1396426714]
-
-[node name="Control" type="Control" parent="PauseMenu" unique_id=955278821]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -145.0
-offset_top = 179.0
-offset_right = -145.0
-offset_bottom = 179.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("6_6loks")
-
-[node name="ColorRect" type="ColorRect" parent="PauseMenu/Control" unique_id=803485853]
-self_modulate = Color(0, 0, 0, 0.53333336)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 145.0
-offset_top = -179.0
-offset_right = 145.0
-offset_bottom = -179.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="PauseMenu/Control" unique_id=674026408]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 476.5
-offset_right = -184.8335
-offset_bottom = -372.0
-grow_horizontal = 2
-grow_vertical = 2
-offset_transform_enabled = true
-texture = ExtResource("6_kbdpr")
-expand_mode = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="PauseMenu/Control" unique_id=1944683445]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/Control/CenterContainer" unique_id=1292398756]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="PauseMenu" unique_id=208595174]
-process_mode = 3
-z_index = 2
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1832.0
-offset_top = 14.0
-offset_right = 1840.0
-offset_bottom = 22.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.05, 0.05)
-icon = ExtResource("7_6ycpv")
-flat = true
-icon_alignment = 1
-script = ExtResource("9_umvci")
-
-[connection signal="mouse_entered" from="PauseMenu/Button" to="PauseMenu/Button" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="PauseMenu/Button" to="PauseMenu/Button" method="_on_mouse_exited"]
-[connection signal="pressed" from="PauseMenu/Button" to="PauseMenu/Control" method="_on_button_pressed"]
+[node name="PauseMenu" parent="." unique_id=1141214478 instance=ExtResource("6_kbdpr")]

@@ -1,0 +1,204 @@
+[gd_scene format=3 uid="uid://c7ayl2kkf754e"]
+
+[ext_resource type="Script" uid="uid://by8rm16alv7qj" path="res://scripts/pause_menu/pause_menu.gd" id="1_rydlp"]
+[ext_resource type="Texture2D" uid="uid://c0qm1q1j5v5hj" path="res://assets/pause_menu/paused.png" id="2_yyft3"]
+[ext_resource type="Texture2D" uid="uid://b6qga6lmpgn7j" path="res://assets/pause_menu/slider/music.png" id="3_nhw52"]
+[ext_resource type="Texture2D" uid="uid://cieex1p4k04mt" path="res://assets/pause_menu/slider/sfx.png" id="4_4pcm2"]
+[ext_resource type="Texture2D" uid="uid://bs8763fxvlk1c" path="res://assets/pause_menu/slider/drag.png" id="5_olk4g"]
+[ext_resource type="Texture2D" uid="uid://by4xrj6sennya" path="res://assets/pause_menu/Pause.png" id="6_b2hac"]
+[ext_resource type="Texture2D" uid="uid://ddw1c72h3216a" path="res://assets/pause_menu/slider/return.png" id="6_nhw52"]
+[ext_resource type="Texture2D" uid="uid://c3aecsdnlrher" path="res://assets/pause_menu/slider/exit.png" id="7_4pcm2"]
+[ext_resource type="Script" uid="uid://nswcp3pf5r8n" path="res://scripts/pause_menu/pause.gd" id="7_24s0g"]
+[ext_resource type="Script" uid="uid://dsdsashj1k0a1" path="res://scripts/pause_menu/return.gd" id="7_nhw52"]
+[ext_resource type="Script" uid="uid://dn25fty1i0ujq" path="res://scripts/pause_menu/exit.gd" id="9_olk4g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nim2u"]
+bg_color = Color(0.8156863, 0.76862746, 0.6431373, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sro07"]
+bg_color = Color(1.2282553, 1.158898, 0.9739451, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_umvci"]
+texture = ExtResource("5_olk4g")
+texture_margin_left = 25.0
+texture_margin_top = 25.0
+texture_margin_right = 25.0
+texture_margin_bottom = 25.0
+expand_margin_left = 12.0
+expand_margin_top = 12.0
+expand_margin_right = 9.0
+expand_margin_bottom = 9.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s5p1y"]
+texture = ExtResource("5_olk4g")
+texture_margin_left = 25.0
+texture_margin_top = 25.0
+texture_margin_right = 25.0
+texture_margin_bottom = 25.0
+expand_margin_left = 12.0
+expand_margin_top = 12.0
+expand_margin_right = 9.0
+expand_margin_bottom = 9.0
+modulate_color = Color(1.499905, 1.499905, 1.499905, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3t4qf"]
+texture = ExtResource("5_olk4g")
+texture_margin_left = 25.0
+texture_margin_top = 25.0
+texture_margin_right = 25.0
+texture_margin_bottom = 25.0
+expand_margin_left = 12.0
+expand_margin_top = 12.0
+expand_margin_right = 9.0
+expand_margin_bottom = 9.0
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=1141214478]
+
+[node name="Control" type="Control" parent="." unique_id=1537948014]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -145.0
+offset_top = 179.0
+offset_right = -145.0
+offset_bottom = 179.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rydlp")
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=862999582]
+self_modulate = Color(0, 0, 0, 0.53333336)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 145.0
+offset_top = -179.0
+offset_right = 145.0
+offset_bottom = -179.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=530633839]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 476.5
+offset_right = -184.8335
+offset_bottom = -372.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+texture = ExtResource("2_yyft3")
+expand_mode = 1
+
+[node name="thethings" type="Control" parent="Control" unique_id=287096294]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="music" type="Sprite2D" parent="Control/thethings" unique_id=1039373451]
+position = Vector2(845, 341)
+scale = Vector2(0.75333333, 0.75333333)
+texture = ExtResource("3_nhw52")
+
+[node name="sfx" type="Sprite2D" parent="Control/thethings" unique_id=2077417184]
+position = Vector2(866, 402)
+scale = Vector2(0.753, 0.753)
+texture = ExtResource("4_4pcm2")
+
+[node name="musicscroll" type="HScrollBar" parent="Control/thethings" unique_id=738247789]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 934.0
+offset_top = 316.0
+offset_right = 1376.0
+offset_bottom = 323.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/scroll = SubResource("StyleBoxFlat_nim2u")
+theme_override_styles/scroll_focus = SubResource("StyleBoxFlat_sro07")
+theme_override_styles/grabber = SubResource("StyleBoxTexture_umvci")
+theme_override_styles/grabber_highlight = SubResource("StyleBoxTexture_s5p1y")
+theme_override_styles/grabber_pressed = SubResource("StyleBoxTexture_3t4qf")
+
+[node name="sfxscroll" type="HScrollBar" parent="Control/thethings" unique_id=1427898497]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 934.0
+offset_top = 377.0
+offset_right = 1376.0
+offset_bottom = 384.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/scroll = SubResource("StyleBoxFlat_nim2u")
+theme_override_styles/scroll_focus = SubResource("StyleBoxFlat_sro07")
+theme_override_styles/grabber = SubResource("StyleBoxTexture_umvci")
+theme_override_styles/grabber_highlight = SubResource("StyleBoxTexture_s5p1y")
+theme_override_styles/grabber_pressed = SubResource("StyleBoxTexture_3t4qf")
+
+[node name="return" type="Button" parent="Control/thethings" unique_id=1839805630]
+layout_mode = 0
+offset_left = 946.0
+offset_top = 446.0
+offset_right = 1057.5789
+offset_bottom = 551.0
+icon = ExtResource("6_nhw52")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_nhw52")
+
+[node name="exit" type="Button" parent="Control/thethings" unique_id=649622647]
+layout_mode = 0
+offset_left = 1138.0
+offset_top = 446.0
+offset_right = 1261.0
+offset_bottom = 554.0
+icon = ExtResource("7_4pcm2")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("9_olk4g")
+
+[node name="pause" type="Button" parent="." unique_id=655709050]
+process_mode = 3
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1831.0
+offset_top = 12.0
+offset_right = 1839.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.05, 0.05)
+icon = ExtResource("6_b2hac")
+flat = true
+icon_alignment = 1
+script = ExtResource("7_24s0g")
+
+[connection signal="mouse_entered" from="Control/thethings/return" to="Control/thethings/return" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Control/thethings/return" to="Control/thethings/return" method="_on_mouse_exited"]
+[connection signal="pressed" from="Control/thethings/return" to="Control" method="_on_return_pressed"]
+[connection signal="mouse_entered" from="Control/thethings/exit" to="Control/thethings/exit" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Control/thethings/exit" to="Control/thethings/exit" method="_on_mouse_exited"]
+[connection signal="pressed" from="Control/thethings/exit" to="Control/thethings/exit" method="_on_pressed"]
+[connection signal="mouse_entered" from="pause" to="pause" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="pause" to="pause" method="_on_mouse_exited"]
+[connection signal="pressed" from="pause" to="Control" method="_on_button_pressed"]
