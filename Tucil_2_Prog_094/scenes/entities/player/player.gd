@@ -153,3 +153,7 @@ func update_footsteps(delta: float) -> void:
 
 		if audio_manager != null:
 			audio_manager.play_step(get_surface_type())
+
+
+func _on_button_mouse_entered() -> void:
+	pass # Replace with function body.
