@@ -1,6 +1,8 @@
-[gd_scene format=3 uid="uid://d4e6ppen5j3ll"]
+[gd_scene format=3 uid="uid://6v7vawpdis7y"]
 
 [ext_resource type="Script" uid="uid://c662devic1uc0" path="res://scripts/npc/npc_wanderer.gd" id="1_bi218"]
+[ext_resource type="AudioStream" uid="uid://djb6cu0yqpbsk" path="res://assets/audio/sfx/footsteps.mp3" id="2_vvme8"]
+[ext_resource type="AudioStream" uid="uid://bee1wo8rm4go0" path="res://assets/audio/sfx/step-on-a-rock.mp3" id="3_g2v81"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_df2p6"]
 load_path = "res://.godot/imported/blue_haired_woman_shadow.png-b9a46d3c3e1c1db1c93d7002d4a1ab3b.ctex"
@@ -313,3 +315,11 @@ radius = 12.0
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=2037940772]
 avoidance_layers = 3
+
+[node name="Footsteps" type="AudioStreamPlayer2D" parent="." unique_id=911259364]
+stream = ExtResource("2_vvme8")
+volume_db = -8.0
+
+[node name="RockStep" type="AudioStreamPlayer2D" parent="." unique_id=1932706483]
+stream = ExtResource("3_g2v81")
+volume_db = -20.0
