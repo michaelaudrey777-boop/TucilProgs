@@ -15,7 +15,7 @@ parameters/looping = true
 
 [node name="Bird" type="AudioStreamPlayer" parent="." unique_id=1499591405]
 stream = ExtResource("2_85pnb")
-volume_db = -5.0
+volume_db = -6.0
 
 [node name="Footsteps" type="AudioStreamPlayer" parent="." unique_id=965972005]
 stream = ExtResource("3_wp3eh")
