@@ -326,10 +326,12 @@ anim_player = NodePath("../AnimationPlayer")
 
 [node name="Footsteps" type="AudioStreamPlayer2D" parent="." unique_id=1135290174]
 stream = ExtResource("3_67e1k")
-volume_db = -8.0
+volume_db = 6.0
+bus = &"SFX"
 
 [node name="RockStep" type="AudioStreamPlayer2D" parent="." unique_id=1297507498]
 stream = ExtResource("4_hg1eu")
-volume_db = -20.0
+volume_db = -12.0
+bus = &"SFX"
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

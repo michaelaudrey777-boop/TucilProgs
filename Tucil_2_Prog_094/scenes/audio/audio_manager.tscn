@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://drnasaftrnwxo"]
 
+[ext_resource type="Script" uid="uid://dhjfq66v1w1h2" path="res://scripts/audio/audio_manager.gd" id="1_85pnb"]
 [ext_resource type="AudioStream" uid="uid://ldix8ym0eppl" path="res://assets/audio/music/exploration.mp3" id="1_cfl81"]
 [ext_resource type="AudioStream" uid="uid://dv71saurt6p5e" path="res://assets/audio/ambience/bird.mp3" id="2_85pnb"]
 [ext_resource type="AudioStream" uid="uid://djb6cu0yqpbsk" path="res://assets/audio/sfx/footsteps.mp3" id="3_wp3eh"]
@@ -7,24 +8,30 @@
 [ext_resource type="AudioStream" uid="uid://bee1wo8rm4go0" path="res://assets/audio/sfx/step-on-a-rock.mp3" id="5_xe7xr"]
 
 [node name="AudioManager" type="Node" unique_id=232559139]
+script = ExtResource("1_85pnb")
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1289038151]
 stream = ExtResource("1_cfl81")
-volume_db = -8.0
+volume_db = 6.0
+bus = &"Music"
 parameters/looping = true
 
 [node name="Bird" type="AudioStreamPlayer" parent="." unique_id=1499591405]
 stream = ExtResource("2_85pnb")
-volume_db = -5.0
+volume_db = 4.0
+bus = &"Music"
 
 [node name="Footsteps" type="AudioStreamPlayer" parent="." unique_id=965972005]
 stream = ExtResource("3_wp3eh")
-volume_db = -8.0
+volume_db = 6.0
+bus = &"SFX"
 
 [node name="UIButton" type="AudioStreamPlayer" parent="." unique_id=1962498269]
 stream = ExtResource("4_c3tep")
 volume_db = 1.0
+bus = &"SFX"
 
 [node name="RockStep" type="AudioStreamPlayer" parent="." unique_id=1109193152]
 stream = ExtResource("5_xe7xr")
-volume_db = -20.0
+volume_db = -12.0
+bus = &"SFX"
