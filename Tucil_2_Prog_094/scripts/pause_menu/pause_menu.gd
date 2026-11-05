@@ -1,7 +1,6 @@
 extends Control
 
 func _ready():
-	show()
 	process_mode = Node.PROCESS_MODE_ALWAYS  # so it works while the tree is paused
 	visible = false
 
