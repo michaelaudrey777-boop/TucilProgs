@@ -280,7 +280,7 @@ func get_surface_type() -> String:
 		if tile_data == null:
 			continue
 
-		var surface: String = str(tile_data.get_custom_data("string_type"))
+		var surface: String = str(tile_data.get_custom_data("surface_type"))
 
 		if surface == "rock":
 			return "rock"

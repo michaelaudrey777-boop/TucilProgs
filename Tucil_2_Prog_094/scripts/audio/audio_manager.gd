@@ -47,3 +47,23 @@ func play_step(surface_type: String) -> void:
 func play_ui_button() -> void:
 	if ui_button.stream != null:
 		ui_button.play()
+
+
+func set_music_volume(value: float) -> void:
+	var bus_index = AudioServer.get_bus_index("Music")
+
+	if bus_index != -1:
+		AudioServer.set_bus_volume_linear(
+			bus_index,
+			clampf(value / 100.0, 0.0, 1.0)
+		)
+
+
+func set_sfx_volume(value: float) -> void:
+	var bus_index = AudioServer.get_bus_index("SFX")
+
+	if bus_index != -1:
+		AudioServer.set_bus_volume_linear(
+			bus_index,
+			clampf(value / 100.0, 0.0, 1.0)
+		)
