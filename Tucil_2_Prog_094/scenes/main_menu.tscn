@@ -1152,6 +1152,7 @@ sources/1 = SubResource("TileSetAtlasSource_jk1qb")
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5dd4i"]
 
 [node name="main menu" type="Control" unique_id=467662247]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
