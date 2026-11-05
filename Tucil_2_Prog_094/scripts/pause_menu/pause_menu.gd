@@ -7,7 +7,7 @@ func _ready():
 func _on_button_pressed() -> void:
 	toggle_pause()
 
-func _unhandled_input(event):
+func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		toggle_pause()
 

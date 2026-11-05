@@ -9,12 +9,10 @@ var x = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	position = p1
+	$"../../..".visible = true
+	get_tree().paused = true
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if Input.is_action_pressed("Up") or Input.is_action_pressed("Left"):
 		x -= 1
 		if x < 0:
@@ -24,3 +22,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		if x > 2:
 			x = 0
 	position = thep[x]
+	if Input.is_action_pressed("ui_accept"):
+		if $"../Exit".has_focus():
+			get_tree().quit()
+		if $"../Play".has_focus():
+			$"../../..".queue_free()
+			get_tree().paused = false
+			
+func _process(delta: float) -> void:
+	if position == p1:
+		$"../Play".grab_focus()
+	if position == p2:
+		$"../Settings".grab_focus()
+	if position == p3:
+		$"../Exit".grab_focus()
