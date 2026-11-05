@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://nswcp3pf5r8n" path="res://scripts/pause_menu/pause.gd" id="7_24s0g"]
 [ext_resource type="Script" uid="uid://dsdsashj1k0a1" path="res://scripts/pause_menu/return.gd" id="7_nhw52"]
 [ext_resource type="Script" uid="uid://dn25fty1i0ujq" path="res://scripts/pause_menu/exit.gd" id="9_olk4g"]
+[ext_resource type="Texture2D" uid="uid://bhf427c6ekyu1" path="res://assets/pause_menu/esc.png" id="12_ofnjo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nim2u"]
 bg_color = Color(0.8156863, 0.76862746, 0.6431373, 1)
@@ -192,6 +193,11 @@ icon = ExtResource("6_b2hac")
 flat = true
 icon_alignment = 1
 script = ExtResource("7_24s0g")
+
+[node name="Sprite2D" type="Sprite2D" parent="pause" unique_id=1672742936]
+position = Vector2(970, 1240)
+scale = Vector2(4.783332, 4.783332)
+texture = ExtResource("12_ofnjo")
 
 [connection signal="mouse_entered" from="Control/thethings/return" to="Control/thethings/return" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Control/thethings/return" to="Control/thethings/return" method="_on_mouse_exited"]
