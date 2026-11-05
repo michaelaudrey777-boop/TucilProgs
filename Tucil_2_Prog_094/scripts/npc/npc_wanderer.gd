@@ -17,6 +17,12 @@ enum AnimState {
 @export_category("Avoidance Thresholds")
 @export var flee_distance: float = 75.0
 
+# Audio
+@onready var footsteps: AudioStreamPlayer2D = $Footsteps
+@onready var rock_step: AudioStreamPlayer2D = $RockStep
+
+var footstep_timer: float = 0.0
+
 var current_state: State = State.IDLE
 var anim_state: AnimState = AnimState.IDLE_BACK
 var last_direction: Vector2 = Vector2.DOWN
@@ -47,10 +53,14 @@ func _ready() -> void:
 	call_deferred("actor_setup")
 
 func actor_setup() -> void:
-	await get_tree().physics_frame
+	var map_rid: RID = get_world_2d().navigation_map
+
+	while NavigationServer2D.map_get_iteration_id(map_rid) == 0:
+		await NavigationServer2D.map_changed
+
 	player = get_tree().get_first_node_in_group("player")
 	follower_npc = get_tree().get_first_node_in_group("follower")
-	
+
 	pick_new_wander_target()
 
 func _physics_process(delta: float) -> void:
@@ -127,17 +137,29 @@ func has_line_of_sight_to(target_pos: Vector2) -> bool:
 	return not ray_cast.is_colliding()
 
 func pick_new_wander_target() -> void:
+	var map_rid: RID = get_world_2d().navigation_map
+
+	while NavigationServer2D.map_get_iteration_id(map_rid) == 0:
+		await NavigationServer2D.map_changed
+
 	current_state = State.WANDER
+
 	var random_offset: Vector2 = Vector2(
 		randf_range(-wander_radius, wander_radius),
 		randf_range(-wander_radius, wander_radius)
 	)
+
 	var raw_target: Vector2 = global_position + random_offset
-	
-	var map_rid: RID = get_world_2d().navigation_map
-	var closest_point: Vector2 = NavigationServer2D.map_get_closest_point(map_rid, raw_target)
-	
-	var target_destination: Vector2 = closest_point if closest_point != Vector2.ZERO else raw_target
+
+	var closest_point: Vector2 = NavigationServer2D.map_get_closest_point(
+		map_rid,
+		raw_target
+	)
+
+	var target_destination: Vector2 = (
+		closest_point if closest_point != Vector2.ZERO else raw_target
+	)
+
 	nav_agent.target_position = target_destination
 
 func trigger_flee_from(source_position: Vector2) -> void:
@@ -168,6 +190,7 @@ func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	move_and_slide()
 	check_bump_collisions()
 	update_state_and_animation(safe_velocity)
+	update_footsteps(get_physics_process_delta_time())
 
 func update_state_and_animation(move_velocity: Vector2) -> void:
 	if move_velocity.length_squared() > 1.0:
@@ -175,7 +198,7 @@ func update_state_and_animation(move_velocity: Vector2) -> void:
 		if abs(move_dir.x) > abs(move_dir.y):
 			last_direction = Vector2.RIGHT if move_dir.x > 0 else Vector2.LEFT
 		else:
-			last_direction = Vector2.DOWN if move_dir.x > 0 else Vector2.UP
+			last_direction = Vector2.DOWN if move_dir.y > 0 else Vector2.UP
 
 	var new_anim: AnimState = anim_state
 
@@ -205,7 +228,61 @@ func play_animation() -> void:
 		AnimState.IDLE_BACK: animation_playback.travel("idle")
 		AnimState.IDLE_LEFT: animation_playback.travel("idle_left")
 		AnimState.IDLE_RIGHT: animation_playback.travel("idle_right")
-		AnimState.RUN_UP: animation_playback.travel("run_back")
+		AnimState.RUN_UP: animation_playback.travel("run back")
 		AnimState.RUN_BACK: animation_playback.travel("run")
-		AnimState.RUN_LEFT: animation_playback.travel("run_left")
-		AnimState.RUN_RIGHT: animation_playback.travel("run_right")
+		AnimState.RUN_LEFT: animation_playback.travel("run left")
+		AnimState.RUN_RIGHT: animation_playback.travel("run right")
+
+# Audio
+func update_footsteps(delta: float) -> void:
+	if velocity.length() < 10.0:
+		footstep_timer = 0.0
+		return
+
+	footstep_timer -= delta
+
+	if footstep_timer <= 0.0:
+		play_npc_step()
+
+		var speed_ratio: float = velocity.length() / speed
+		footstep_timer = 0.45 / max(speed_ratio, 0.5)
+
+
+func play_npc_step() -> void:
+	var surface_type: String = get_surface_type()
+
+	if surface_type == "rock":
+		if rock_step and rock_step.stream:
+			rock_step.play()
+	else:
+		if footsteps and footsteps.stream:
+			footsteps.play()
+
+
+func get_surface_type() -> String:
+	var tile_layers: Array[String] = [
+		"misc_ground",
+		"misc_water",
+		"plateau",
+		"ground"
+	]
+
+	for layer_name in tile_layers:
+		var tile_layer: TileMapLayer = get_node_or_null("../" + layer_name)
+
+		if tile_layer == null:
+			continue
+
+		var local_pos: Vector2 = tile_layer.to_local(global_position)
+		var tile_coords: Vector2i = tile_layer.local_to_map(local_pos)
+		var tile_data: TileData = tile_layer.get_cell_tile_data(tile_coords)
+
+		if tile_data == null:
+			continue
+
+		var surface: String = str(tile_data.get_custom_data("surface_type"))
+
+		if surface == "rock":
+			return "rock"
+
+	return "ground"

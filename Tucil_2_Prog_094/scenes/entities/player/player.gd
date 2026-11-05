@@ -29,7 +29,7 @@ var last_direction: Vector2 = Vector2.DOWN
 @onready var camera: Camera2D = $Camera2D
 
 # AUDIO
-@onready var audio_manager = get_node_or_null("../AudioManager")
+@onready var audio_manager = get_node_or_null("../../AudioManager")
 
 var footstep_timer: float = 0.0
 @export var footstep_interval: float = 0.4
